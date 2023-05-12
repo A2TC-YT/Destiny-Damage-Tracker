@@ -29,7 +29,7 @@ Here's a brief overview of each setting in the `settings.txt` file:
 A hotkey for swiftly closing and relaunching the program with one button press, handy for applying new settings.
 
 #### Settings GUI Hotkey
-Launch a GUI with all raid and dungeon bosses at your fingertips. Upon selection, the tool loads the respective boss's health pool, assuming the on-screen health bar corresponds to that boss. Choose "Default" or "Default with final stand" for a percentage-based health and DPS calculation.
+Press the assigned hotkey to open a window where you can select which boss you are facing. Upon selection, the tool loads the respective boss's health pool, assuming the on-screen health bar corresponds to that boss. Choose "Default" or "Default with final stand" for a percentage-based health and DPS calculation.
 
 #### Manually Start and Stop DPS Phases
 Toggle this option to take control of DPS phases, determining when they start and stop. Note that DPS and certain other metrics are only calculated during DPS phases. If set to 'false', DPS phases commence and conclude automatically based on the boss's health bar changes.
