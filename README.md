@@ -77,8 +77,12 @@ Set this to match your in-game colorblind setting. The accepted options are "Nor
 
 ## Credits
 Thank you to Urnan for the awesome logo for DDT. Check out more of his work here 
+
 https://www.instagram.com/se_designs_co/
+
 https://twitter.com/UrNan21635714
 
+
 The Gdip_all library is from tic:
+
 https://www.autohotkey.com/boards/viewtopic.php?f=6&t=6517&sid=6dd9f822a82afeaba79f087d52b17721
