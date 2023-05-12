@@ -1,6 +1,6 @@
 # 🚀 Destiny Damage Tracker 🚀
 
-Destiny Damage Tracker is a practical tool that helps you keep track of important stats in Destiny 2. This includes the boss's current health, the fireteam's DPS (damage per second), the estimated time to defeat the boss, and more. 
+Destiny Damage Tracker is a tool for Destiny 2 that helps you keep track of certain statistics and information. This includes the boss's current health, the fireteam's DPS (damage per second), the estimated time to defeat the boss, and more. 
 
 ## 🎯 How it Works 🎯
 
