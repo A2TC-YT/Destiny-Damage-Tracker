@@ -85,6 +85,10 @@ Set this to match your in-game colorblind setting. The accepted options are "Nor
 #### Brightness Level
 Adjust the brightness level of the program to match your screen. Supported brightness options are: 2, 3, 4, 5, 6, 7. Lower brightness options may be less consistent.
 
+## Known Issues
+
+- Shadowplay recordings are flickery with the overlay. Using the separate window to display info allows for normal shadowplay behavior.
+
 ## 🙏 Credits 🙏
 Thank you to Urnan for the awesome logo for DDT. Check out more of his work here 
 
