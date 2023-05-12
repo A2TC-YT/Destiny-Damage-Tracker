@@ -74,3 +74,11 @@ Switch this option on for optimal performance on ultrawide 3440x1440 monitors.
 
 #### Colorblind Setting
 Set this to match your in-game colorblind setting. The accepted options are "Normal", "Deuteranopia", "Protanopia", and "Tritanopia".
+
+## Credits
+Thank you to Urnan for the awesome logo for DDT. Check out more of his work here 
+https://www.instagram.com/se_designs_co/
+https://twitter.com/UrNan21635714
+
+The Gdip_all library is from tic:
+https://www.autohotkey.com/boards/viewtopic.php?f=6&t=6517&sid=6dd9f822a82afeaba79f087d52b17721
