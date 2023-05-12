@@ -15,7 +15,7 @@ Check out a short video of DDT in use here: https://www.youtube.com/watch?v=Gz7e
 You have two options for installing Destiny Damage Tracker:
 
 - 📌 **Releases Page**: Navigate to the [releases](https://github.com/A2TC-YT/Destiny-Damage-Tracker/releases) page and download the most recent release.
-- 📂 **Download and Extract**: Download the files, extract them into a preferred folder, and run the "Destiny Damage Tracker.ahk" file.
+- 📂 **Download and Extract**: Download the files, extract them into a preferred folder, and run the `DDT.ahk` file.
 
 ## ⚙️ Setup and Settings ⚙️
 
