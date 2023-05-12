@@ -77,7 +77,7 @@ Switch this option on to bold all the text from the program.
 Enable this setting for the program to function optimally on 1920x1080 monitors. If disabled, the program adjusts to work for 2560x1440 monitors, which is its default setting.
 
 #### Ultrawide 1440p Monitor
-Switch this option on for optimal performance on ultrawide 3440x1440 monitors.
+Switch this option on for optimal performance on ultrawide 3440x1440 monitors. You may have to adjust your screen bounds for this to work, the wider the better.
 
 #### Colorblind Setting
 Set this to match your in-game colorblind setting. The accepted options are "Normal", "Deuteranopia", "Protanopia", and "Tritanopia".
