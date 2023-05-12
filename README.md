@@ -61,6 +61,9 @@ Turn on to display a timer indicating the active DPS phase duration.
 #### Show Estimated Time to Kill
 Turn on to display the estimated time to defeat the boss based on current DPS and remaining boss health.
 
+#### Display info in a separate window
+If set to 'true', the information provided by the program will be displayed in a separate window. If 'false', the information will overlay the game screen.
+
 #### GUI Text Color
 Personalize the text color displayed by the program. Basic colors such as "White", "Red", "Green", and hex color codes are accepted (e.g., "FF0000" for red).
 
