@@ -6,6 +6,11 @@ Destiny Damage Tracker is a tool for Destiny 2 that helps you keep track of cert
 
 The functionality of Destiny Damage Tracker is pretty straightforward. It counts the pixels in the boss's health bar on the screen and uses this data to calculate the statistics that are presented to you.
 
+## ⚠️ Limitations ⚠️
+
+- If you have an older CPU or have many things running in the background the program may not be very consistent and can cause the health percent to flicker between 0 and 100 which will mess up the DPS calculations.
+- Shadowplay recordings are flickery with the overlay. Using the separate window to display info allows for normal shadowplay behavior.
+
 ## 🎥 In Game Demo 🎥
 
 Check out a short video of DDT in use here: https://www.youtube.com/watch?v=Gz7eIRE7WYw
@@ -84,10 +89,6 @@ Set this to match your in-game colorblind setting. The accepted options are "Nor
 
 #### Brightness Level
 Adjust the brightness level of the program to match your screen. Supported brightness options are: 2, 3, 4, 5, 6, 7. Lower brightness options may be less consistent.
-
-## Known Issues
-
-- Shadowplay recordings are flickery with the overlay. Using the separate window to display info allows for normal shadowplay behavior.
 
 ## 🙏 Credits 🙏
 Thank you to Urnan for the awesome logo for DDT. Check out more of his work here 
