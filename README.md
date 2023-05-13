@@ -13,7 +13,7 @@ Once installed you may need to run it once for the settings file to show up. Fro
 ##  Limitations 
 
 - If you have an older CPU or have many things running in the background the program may not be very consistent and can cause the health percent to flicker between 0 and 100 which will mess up the DPS calculations.
-- Shadowplay recordings are flickery with the overlay. Using the separate window to display info allows for normal shadowplay behavior.
+- Shadowplay recordings may be flickery with the overlay. Using the separate window to display info allows for normal shadowplay behavior.
 
 ##  In Game Demo 
 
