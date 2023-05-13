@@ -412,7 +412,6 @@ calculateDPS(bossName)
     boss_max_hp := boss_health_pool[bossName]
     final_stand := boss_final_stand[bossName]
     
-    MsgBox, % bossName " " final_stand
     If (bossName == "default with final stand" || bossName == "default")
         is_default := 1
     Else
