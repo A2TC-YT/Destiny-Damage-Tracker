@@ -15,7 +15,7 @@ Rhulk, 15000000, 1
 Riven, 2600000, 1
 Sanctified Mind, 4800000, 0
 Shuro Chi, 2000000, 5
-Taniks, 8000000, 1
+Taniks, 8950000, 1
 Templar, 6600000, 0
 Warpriest, 18900000, 0
 =======DUNGEONS=======, 1, 0
