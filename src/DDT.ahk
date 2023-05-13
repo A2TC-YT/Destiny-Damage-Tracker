@@ -48,93 +48,7 @@ global isUltraWide := 0
 global boss_health_colors 
 global separateWindow := 0
 
-FileRead, settings, settings.txt
-
-; Parse each line of the settings
-Loop, Parse, settings, `n, `r
-{
-    ; Split the line into setting and value
-    StringSplit, line, A_LoopField, =
-    setting := Trim(line1)
-    value := Trim(line2)
-
-    ; Check each setting and assign the corresponding value
-    if (setting == "Reload Script Hotkey")
-        reloadScriptHotkey := value
-    if (setting == "Settings GUI Hotkey")
-        settingsGUIHotkey := value
-    else if (setting == "Start And Stop DPS Phase")
-        startAndStopDPS := value
-    else if (setting == "Manually Start and Stop DPS Phases")
-        manualDPSPhases := ParseBooleanValue(value)
-    else if (setting == "Include DPS Calculations")
-        includeDPSCalculations := ParseBooleanValue(value)
-    else if (setting == "DPS Numbers Near Crosshair")
-        DPSatCrosshair := ParseBooleanValue(value)
-    else if (setting == "Decimal Places in Main Health Percentage")
-        decimalPlacesHealthPercentage := value
-    else if (setting == "Include Estimated Boss Health")
-        includeEstimatedBossHealth := ParseBooleanValue(value)
-    else if (setting == "Show Damage Dealt Instead of Boss Health")
-        showDamageDealt := ParseBooleanValue(value)
-    else if (setting == "Show Damage Phase Duration")
-        showDamageDuration := ParseBooleanValue(value)
-    else if (setting == "Show Estimated Time to Kill")
-        estimateTimeToKill := ParseBooleanValue(value)
-    else if (setting == "Include Burst and Sustained Specifiers")
-        includeBurstAndSustainedSpecifiers := ParseBooleanValue(value)
-    else if (setting == "GUI Text Color")
-        textColor := value
-    else if (setting == "GUI Text Font")
-        textFont := value
-    else if (setting == "Display info in a separate window")
-        separateWindow := ParseBooleanValue(value)
-    else if (setting == "Make Text Bold")
-        boldText := ParseBooleanValue(value)
-    else if (setting == "1920x1080")
-        1080pResolution := ParseBooleanValue(value)
-    else if (setting == "Ultrawide 1440p Monitor")
-        isUltraWide := ParseBooleanValue(value)
-    else if (setting == "Brightness Level")
-        brightnessLevel := value
-    else if (setting == "Colorblind Setting")
-        ColorBlind := value
-}
-
-brightnessIndex := brightnessLevel - 1
-if (ColorBlind == "Normal" || ColorBlind == "normal")
-{
-    hexCodes := ["0xB86708", "0xE49422", "0xC1760D", "0xE69A2A", "0xC88113", "0xE8A032", "0xCC8918", "0xEAA73A", "0xD0901D", "0xECAD42", "0xD39621", "0xEDB147"]
-    Clipboard := hexCodes[brightnessIndex*2-1] " " hexCodes[brightnessIndex*2]
-    boss_health_colors := findAllColorsBetween(hexCodes[brightnessIndex*2-1], hexCodes[brightnessIndex*2])
-}
-else if (ColorBlind == "Deuteranopia" || ColorBlind == "deuteranopia")
-{
-    hexCodes := ["0x606121", "0x929252", "0x6E6A2E", "0x929252", "0x767A37", "0x989958", "0x7E8140", "0x9FA060", "0x868846", "0xA6A768", "0x8E8F4E", "0xAAAB6E"]
-    boss_health_colors := findAllColorsBetween(hexCodes[brightnessIndex*2-1], hexCodes[brightnessIndex*2])
-}
-else if (ColorBlind == "Protanopia" || ColorBlind == "protanopia")
-{
-    hexCodes := ["0xA76B00", "0xD2A724", "0xAD7700", "0xD4A926", "0xB78500", "0xD8AD2A", "0xBF8A00", "0xDAAF2C", "0xBF9100", "0xDCB12F", "0xC49800", "0xDEB331"]
-    boss_health_colors := findAllColorsBetween(hexCodes[brightnessIndex*2-1], hexCodes[brightnessIndex*2])
-}
-else if (ColorBlind == "Tritanopia" || ColorBlind == "tritanopia" )
-{
-    hexCodes := ["0x9E414F", "0xCC7F8D", "0xAC525F", "0xCE818E", "0xAF5A67", "0xD08391", "0xB56471", "0xD28694", "0xBA6A77", "0xD58A98", "0xBA727F", "0xD88F9B"]
-    boss_health_colors := findAllColorsBetween(hexCodes[brightnessIndex*2-1], hexCodes[brightnessIndex*2])
-}
-
-; Helper function to parse boolean values from the settings file
-ParseBooleanValue(value) {
-    if (value == "true" || value == "1" || value == "True" || value == "TRUE")
-        return 1
-    else
-        return 0
-}
-
-Hotkey, %settingsGUIHotkey%, ShowSettingsGUI
-Hotkey, %startAndStopDPS%, manualDPSPhase
-Hotkey, %reloadScriptHotkey%, reload_the_script
+get_settings()
 
 global change_phase := 0
 global time_to_kill := 0
@@ -292,6 +206,98 @@ global currently_shown := 1
 
 return
 
+get_settings()
+{
+    FileRead, settings, settings.txt
+
+    ; Parse each line of the settings
+    Loop, Parse, settings, `n, `r
+    {
+        ; Split the line into setting and value
+        StringSplit, line, A_LoopField, =
+        setting := Trim(line1)
+        value := Trim(line2)
+
+        ; Check each setting and assign the corresponding value
+        if (setting == "Reload Script Hotkey")
+            reloadScriptHotkey := value
+        if (setting == "Settings GUI Hotkey")
+            settingsGUIHotkey := value
+        else if (setting == "Start And Stop DPS Phase")
+            startAndStopDPS := value
+        else if (setting == "Manually Start and Stop DPS Phases")
+            manualDPSPhases := ParseBooleanValue(value)
+        else if (setting == "Include DPS Calculations")
+            includeDPSCalculations := ParseBooleanValue(value)
+        else if (setting == "DPS Numbers Near Crosshair")
+            DPSatCrosshair := ParseBooleanValue(value)
+        else if (setting == "Decimal Places in Main Health Percentage")
+            decimalPlacesHealthPercentage := value
+        else if (setting == "Include Estimated Boss Health")
+            includeEstimatedBossHealth := ParseBooleanValue(value)
+        else if (setting == "Show Damage Dealt Instead of Boss Health")
+            showDamageDealt := ParseBooleanValue(value)
+        else if (setting == "Show Damage Phase Duration")
+            showDamageDuration := ParseBooleanValue(value)
+        else if (setting == "Show Estimated Time to Kill")
+            estimateTimeToKill := ParseBooleanValue(value)
+        else if (setting == "Include Burst and Sustained Specifiers")
+            includeBurstAndSustainedSpecifiers := ParseBooleanValue(value)
+        else if (setting == "GUI Text Color")
+            textColor := value
+        else if (setting == "GUI Text Font")
+            textFont := value
+        else if (setting == "Display info in a separate window")
+            separateWindow := ParseBooleanValue(value)
+        else if (setting == "Make Text Bold")
+            boldText := ParseBooleanValue(value)
+        else if (setting == "1920x1080")
+            1080pResolution := ParseBooleanValue(value)
+        else if (setting == "Ultrawide 1440p Monitor")
+            isUltraWide := ParseBooleanValue(value)
+        else if (setting == "Brightness Level")
+            brightnessLevel := value
+        else if (setting == "Colorblind Setting")
+            ColorBlind := value
+    }
+
+    brightnessIndex := brightnessLevel - 1
+    if (ColorBlind == "Normal" || ColorBlind == "normal")
+    {
+        hexCodes := ["0xB86708", "0xE49422", "0xC1760D", "0xE69A2A", "0xC88113", "0xE8A032", "0xCC8918", "0xEAA73A", "0xD0901D", "0xECAD42", "0xD39621", "0xEDB147"]
+        boss_health_colors := findAllColorsBetween(hexCodes[brightnessIndex*2-1], hexCodes[brightnessIndex*2])
+    }
+    else if (ColorBlind == "Deuteranopia" || ColorBlind == "deuteranopia")
+    {
+        hexCodes := ["0x606121", "0x929252", "0x6E6A2E", "0x929252", "0x767A37", "0x989958", "0x7E8140", "0x9FA060", "0x868846", "0xA6A768", "0x8E8F4E", "0xAAAB6E"]
+        boss_health_colors := findAllColorsBetween(hexCodes[brightnessIndex*2-1], hexCodes[brightnessIndex*2])
+    }
+    else if (ColorBlind == "Protanopia" || ColorBlind == "protanopia")
+    {
+        hexCodes := ["0xA76B00", "0xD2A724", "0xAD7700", "0xD4A926", "0xB78500", "0xD8AD2A", "0xBF8A00", "0xDAAF2C", "0xBF9100", "0xDCB12F", "0xC49800", "0xDEB331"]
+        boss_health_colors := findAllColorsBetween(hexCodes[brightnessIndex*2-1], hexCodes[brightnessIndex*2])
+    }
+    else if (ColorBlind == "Tritanopia" || ColorBlind == "tritanopia" )
+    {
+        hexCodes := ["0x9E414F", "0xCC7F8D", "0xAC525F", "0xCE818E", "0xAF5A67", "0xD08391", "0xB56471", "0xD28694", "0xBA6A77", "0xD58A98", "0xBA727F", "0xD88F9B"]
+        boss_health_colors := findAllColorsBetween(hexCodes[brightnessIndex*2-1], hexCodes[brightnessIndex*2])
+    }
+
+
+    Hotkey, %settingsGUIHotkey%, ShowSettingsGUI
+    Hotkey, %startAndStopDPS%, manualDPSPhase
+    Hotkey, %reloadScriptHotkey%, reload_the_script
+    Return
+}
+
+; Helper function to parse boolean values from the settings file
+ParseBooleanValue(value) {
+    if (value == "true" || value == "1" || value == "True" || value == "TRUE")
+        return 1
+    else
+        return 0
+}
+
 ; hide the gui if destiny isnt currently in focus
 check_destiny_open:
     IfWinActive, Destiny 2
@@ -336,7 +342,7 @@ bossHealthPercentage(pBitmap, has_final=0)
     loop, % has_final
     {
         totalPixels -= 2
-        if (healthbar_location == "858|1302|845|3")
+        if (!1080pResolution)
             totalPixels -= 7
     } 
     return (healthBarPixels / totalPixels) * 100
@@ -405,6 +411,8 @@ calculateDPS(bossName)
 
     boss_max_hp := boss_health_pool[bossName]
     final_stand := boss_final_stand[bossName]
+    
+    MsgBox, % bossName " " final_stand
     If (bossName == "default with final stand" || bossName == "default")
         is_default := 1
     Else
@@ -593,7 +601,13 @@ manualDPSPhase:
         change_phase := 1
 Return
 
+; F5::
+;     Clipboard := percent_dealt
+; Return
+
 reload_the_script:
-Reload
+    Run, %A_ScriptDir%\DDT.exe
+    ExitApp
+return
 
 ^Esc::ExitApp
