@@ -1,32 +1,36 @@
-# 🚀 Destiny Damage Tracker 🚀
+#  Destiny Damage Tracker 
 
 Destiny Damage Tracker is a tool for Destiny 2 that helps you keep track of certain statistics and information. This includes the boss's current health, the fireteam's DPS (damage per second), the estimated time to defeat the boss, and more. 
 
-## 🎯 How it Works 🎯
+##  How it Works 
 
 The functionality of Destiny Damage Tracker is pretty straightforward. It counts the pixels in the boss's health bar on the screen and uses this data to calculate the statistics that are presented to you.
 
-## ⚠️ Limitations ⚠️
+##  How to Use DDT 
+
+Once installed you may need to run it once for the settings file to show up. From there adjust your settings however you like, making sure to have the screen settings match your in game settings. Then you can run the program again or press the hotkey to quick reload the script. From there press the hotkey to open the boss selector (by default it is F3) select a boss or default and press "OK". Now you are good to go.
+
+##  Limitations 
 
 - If you have an older CPU or have many things running in the background the program may not be very consistent and can cause the health percent to flicker between 0 and 100 which will mess up the DPS calculations.
 - Shadowplay recordings are flickery with the overlay. Using the separate window to display info allows for normal shadowplay behavior.
 
-## 🎥 In Game Demo 🎥
+##  In Game Demo 
 
 Check out a short video of DDT in use here: https://www.youtube.com/watch?v=Gz7eIRE7WYw
 
-## 🛠️ Installation 🛠️
+##  Installation 
 
 You have two options for installing Destiny Damage Tracker:
 
-- 📌 **Releases Page**: Navigate to the [releases](https://github.com/A2TC-YT/Destiny-Damage-Tracker/releases) page and download the most recent release.
-- 📂 **Download and Extract**: Download the files, extract them into a preferred folder, and run the `DDT.ahk` file.
+-  **Releases Page**: Navigate to the [releases](https://github.com/A2TC-YT/Destiny-Damage-Tracker/releases) page and download the most recent release.
+-  **Download and Extract**: Download the files, extract them into a preferred folder, and run the `DDT.ahk` file.
 
-## ⚙️ Setup and Settings ⚙️
+##  Setup and Settings 
 
 Before you start using Destiny Damage Tracker, you might want to adjust some settings to fit your preferences. You can do this in the "settings.txt" file in the program's folder. You'll find several options there that allow you to change how the tool looks and behaves.
 
-### 🎚️ Understanding the Settings 🎚️
+###  Understanding the Settings 
 
 Here's a brief overview of each setting in the `settings.txt` file:
 
