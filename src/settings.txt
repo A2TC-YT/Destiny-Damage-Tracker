@@ -1,9 +1,10 @@
 ===========================
 ==        HOTKEYS        ==
 ===========================
+Close Script Hotkey                      = F6
 Reload Script Hotkey                     = F4
 Settings GUI Hotkey                      = F3
-Manually Start and Stop DPS Phases       = true
+Manually Start and Stop DPS Phases       = false
 Start And Stop DPS Phase                 = F2
 
 =============================
@@ -33,10 +34,10 @@ Make Text Bold                           = true
 ============================
 ==         SCREEN         ==
 ============================
-1920x1080                                = false
+1920x1080                                = true
 Ultrawide 1440p Monitor                  = false
-Colorblind Setting                       = Normal
+Colorblind Setting                       = Protanopia
 Colorblind options are: Normal, Deuteranopia, Protanopia, Tritanopia
-Brightness Level                         = 7
+Brightness Level                         = 4
 Supported brightness options are: 2, 3, 4, 5, 6, 7
 Lower brightness options may be less consistent
