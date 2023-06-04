@@ -34,6 +34,9 @@ Before you start using Destiny Damage Tracker, you might want to adjust some set
 
 Here's a brief overview of each setting in the `settings.txt` file:
 
+#### Close Script Hotkey
+A hotkey for swiftly closing the program with one button press.
+
 #### Reload Script Hotkey
 A hotkey for swiftly closing and relaunching the program with one button press, handy for applying new settings.
 

@@ -31,6 +31,7 @@ global brightnessLevel := 7
 global settingsGUIHotkey := "F5"  ; default settings
 global startAndStopDPS := "F2"
 global reloadScriptHotkey := "F4"
+global closeScriptHotkey := "F6"
 global includeDPSCalculations := 1
 global DPSatCrosshair := 0
 global includeEstimatedBossHealth := 1
@@ -221,6 +222,8 @@ get_settings()
         ; Check each setting and assign the corresponding value
         if (setting == "Reload Script Hotkey")
             reloadScriptHotkey := value
+        if (setting == "Close Script Hotkey")
+            closeScriptHotkey := value
         if (setting == "Settings GUI Hotkey")
             settingsGUIHotkey := value
         else if (setting == "Start And Stop DPS Phase")
@@ -287,6 +290,7 @@ get_settings()
     Hotkey, %settingsGUIHotkey%, ShowSettingsGUI
     Hotkey, %startAndStopDPS%, manualDPSPhase
     Hotkey, %reloadScriptHotkey%, reload_the_script
+    Hotkey, %closeScriptHotkey%, close_the_script
     Return
 }
 
@@ -606,6 +610,10 @@ Return
 
 reload_the_script:
     Run, %A_ScriptDir%\DDT.exe
+    ExitApp
+return
+
+close_the_script:
     ExitApp
 return
 
