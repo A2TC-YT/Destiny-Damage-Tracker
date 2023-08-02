@@ -1,29 +1,31 @@
 default, 100, 0
 default with final stand, 100, 1
 =========RAIDS==========, 1, 0
-Atheon, 8770000, 0
-Atraks, 700000, 1
-Caretaker, 24500000, 1
-Consecrated Mind, 3700000, 0
-Explicator, 13500000, 1
-Golgoroth, 16250000, 0
-Kalli, 4400000, 0
-Morgeth, 4000000, 0
-Nezarec, 12000000, 1
-Oryx, 16500000, 1
-Rhulk, 15000000, 1
-Riven, 2600000, 1
-Sanctified Mind, 4800000, 0
-Shuro Chi, 2000000, 5
-Taniks, 8950000, 1
-Templar, 6600000, 0
-Warpriest, 18900000, 0
+Atheon, 9019662, 0
+Atraks, 2432075, 1
+Caretaker, 28726134, 1
+Consecrated Mind, 3652862, 0
+Explicator, 12959925, 1
+Golgoroth, 16292094, 0
+Kalli, 4422481, 0
+Morgeth, 2020823, 0
+Nezarec, 11923560, 1
+Oryx, 16340439, 1
+Rhulk, 15396873, 1
+Riven, 2587488, 1
+Sanctified Mind, 4844678, 0
+Shuro Chi, 3873758, 5
+Taniks, 9089697, 1
+Templar, 6300377, 0
+Warpriest, 19163406, 0
 =======DUNGEONS=======, 1, 0
-Akelous, 5500000, 0
-Avarokk, 6100000, 0
-Caiatl, 4800000, 0
-Galhran, 5300000, 0
-Kell Echo, 7200000, 0
-Persys, 5600000, 0
-Phry'zhia, 4360000, 0
-Zulmak, 2000000, 0
+Akelous, 5690511, 0
+Avarokk, 4746905, 0
+Caiatl, 4800906, 0
+Ecthar, 10691986, 0
+Galhran, 5358093, 0
+Kell Echo, 3572347, 0
+Persys, 7531960, 0
+Phry'zhia, 4339772, 0
+Simmumahm, 8952378, 0
+Zulmak, 1962478, 0
