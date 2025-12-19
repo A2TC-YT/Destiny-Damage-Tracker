@@ -28,9 +28,10 @@ Gui, settings: Add, Button, gButtonOK, OK
 
 global ColorBlind := "Normal"
 global brightnessLevel := 7
-global settingsGUIHotkey := "F5"  ; default settings
-global startAndStopDPS := "F2"
-global reloadScriptHotkey := "F4"
+global settingsGUIHotkey := "F2"  ; default settings
+global startAndStopDPS := "F3"
+global reloadScriptHotkey := "F5"
+global closeScriptHotkey := "F4"
 global includeDPSCalculations := 1
 global DPSatCrosshair := 0
 global includeEstimatedBossHealth := 1
@@ -221,6 +222,8 @@ get_settings()
         ; Check each setting and assign the corresponding value
         if (setting == "Reload Script Hotkey")
             reloadScriptHotkey := value
+        if (setting == "Close Script Hotkey")
+            closeScriptHotkey := value
         if (setting == "Settings GUI Hotkey")
             settingsGUIHotkey := value
         else if (setting == "Start And Stop DPS Phase")
@@ -264,7 +267,7 @@ get_settings()
     brightnessIndex := brightnessLevel - 1
     if (ColorBlind == "Normal" || ColorBlind == "normal")
     {
-        hexCodes := ["0xB86708", "0xE49422", "0xC1760D", "0xE69A2A", "0xC88113", "0xE8A032", "0xCC8918", "0xEAA73A", "0xD0901D", "0xECAD42", "0xD39621", "0xEDB147"]
+        hexCodes := ["0xB86708", "0xE49422", "0xBE740D", "0xE69A2A", "0xC88113", "0xE8A032", "0xCC8918", "0xEAA73A", "0xD0901D", "0xECAD42", "0xD39621", "0xFFFFFF"] ; 0xD39621-0xEDB147 default, 0xFFFFFF for full white
         boss_health_colors := findAllColorsBetween(hexCodes[brightnessIndex*2-1], hexCodes[brightnessIndex*2])
     }
     else if (ColorBlind == "Deuteranopia" || ColorBlind == "deuteranopia")
@@ -286,6 +289,7 @@ get_settings()
 
     Hotkey, %settingsGUIHotkey%, ShowSettingsGUI
     Hotkey, %startAndStopDPS%, manualDPSPhase
+    Hotkey, %closeScriptHotkey%, close_the_script
     Hotkey, %reloadScriptHotkey%, reload_the_script
     Return
 }
@@ -398,14 +402,16 @@ bossHealthPercentage(pBitmap, has_final=0)
 
 Return
 
-; this i sthe main driving fucntion in this script
+; this is the main driving fucntion in this script
 calculateDPS(bossName)
 {
+    global start_health
     global dps_start_time
     global total_damage := 0
     global highest_dps := 0
     global last_boss_hp_percent
     global time_of_last_damage
+    global boss_max_hp
 
     stop_loop := 0
 
@@ -605,8 +611,41 @@ Return
 ; Return
 
 reload_the_script:
-    Run, %A_ScriptDir%\DDT.exe
+    reload
+return
+
+close_the_script:
     ExitApp
 return
+
+F6::
+    global sleep_time_seconds := 90
+    global startTime := A_TickCount
+    global beast := ""
+    global start_damage := percent_dealt
+    SetTimer, damage_test, % sleep_time_seconds*1000
+    SetTimer, increment_damage, 50
+return
+
+increment_damage:
+    temp_var := (percent_dealt - start_damage)*boss_max_hp
+    beast := beast "`n" (A_TickCount - startTime) . "," . temp_var
+return
+
+damage_test:
+    SetTimer, damage_test, off
+    SetTimer, increment_damage, off
+    damage_done := FormatWithCommas(Round((percent_dealt - start_damage)*boss_max_hp, 0))
+    temp_dps := FormatWithCommas(Round((percent_dealt - start_damage)*boss_max_hp/sleep_time_seconds, 0))
+    info = %damage_done% damage dealt in %sleep_time_seconds% seconds`n %temp_dps% DPS
+    Clipboard := info "`n" beast
+    MsgBox, % info
+
+    ; Save the data to a CSV file
+    FileDelete, dps.csv ; delete the old file if it exists
+    time := SubStr(A_Hour "-" A_Min "-" A_Sec, 1, 8)
+    FileAppend, %beast%, %time%.csv
+return
+
 
 ^Esc::ExitApp
