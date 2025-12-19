@@ -1,8 +1,8 @@
-Phry'zhia, 101053, 0
+Carl, 1500000, 0
 Riven, 170255, 1
 Savathun, 249945, 1
 Templar, 182596, 0
-Carl, 1500000, 0
+Phry'zhia, 101053, 0
 Testing (final), 10000000, 1
 Testing (no final), 10000000, 0
 Agraios, 530451, 0
