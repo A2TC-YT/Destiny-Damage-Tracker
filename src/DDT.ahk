@@ -264,27 +264,27 @@ get_settings()
             ColorBlind := value
     }
 
-    brightnessIndex := brightnessLevel - 1
-    if (ColorBlind == "Normal" || ColorBlind == "normal")
-    {
-        hexCodes := ["0xB86708", "0xE49422", "0xBE740D", "0xE69A2A", "0xC88113", "0xE8A032", "0xCC8918", "0xEAA73A", "0xD0901D", "0xECAD42", "0xD39621", "0xFFFFFF"] ; 0xD39621-0xEDB147 default, 0xFFFFFF for full white
-        boss_health_colors := findAllColorsBetween(hexCodes[brightnessIndex*2-1], hexCodes[brightnessIndex*2])
-    }
-    else if (ColorBlind == "Deuteranopia" || ColorBlind == "deuteranopia")
-    {
-        hexCodes := ["0x606121", "0x929252", "0x6E6A2E", "0x929252", "0x767A37", "0x989958", "0x7E8140", "0x9FA060", "0x868846", "0xA6A768", "0x8E8F4E", "0xAAAB6E"]
-        boss_health_colors := findAllColorsBetween(hexCodes[brightnessIndex*2-1], hexCodes[brightnessIndex*2])
-    }
-    else if (ColorBlind == "Protanopia" || ColorBlind == "protanopia")
-    {
-        hexCodes := ["0xA76B00", "0xD2A724", "0xAD7700", "0xD4A926", "0xB78500", "0xD8AD2A", "0xBF8A00", "0xDAAF2C", "0xBF9100", "0xDCB12F", "0xC49800", "0xDEB331"]
-        boss_health_colors := findAllColorsBetween(hexCodes[brightnessIndex*2-1], hexCodes[brightnessIndex*2])
-    }
-    else if (ColorBlind == "Tritanopia" || ColorBlind == "tritanopia" )
-    {
-        hexCodes := ["0x9E414F", "0xCC7F8D", "0xAC525F", "0xCE818E", "0xAF5A67", "0xD08391", "0xB56471", "0xD28694", "0xBA6A77", "0xD58A98", "0xBA727F", "0xD88F9B"]
-        boss_health_colors := findAllColorsBetween(hexCodes[brightnessIndex*2-1], hexCodes[brightnessIndex*2])
-    }
+    ; brightnessIndex := brightnessLevel - 1
+    ; if (ColorBlind == "Normal" || ColorBlind == "normal")
+    ; {
+    ;     hexCodes := ["0xB86708", "0xE49422", "0xBE740D", "0xE69A2A", "0xC88113", "0xE8A032", "0xCC8918", "0xEAA73A", "0xD0901D", "0xECAD42", "0xD39621", "0xFFFFFF"] ; 0xD39621-0xEDB147 default, 0xFFFFFF for full white
+    ;     boss_health_colors := findAllColorsBetween(hexCodes[brightnessIndex*2-1], hexCodes[brightnessIndex*2])
+    ; }
+    ; else if (ColorBlind == "Deuteranopia" || ColorBlind == "deuteranopia")
+    ; {
+    ;     hexCodes := ["0x606121", "0x929252", "0x6E6A2E", "0x929252", "0x767A37", "0x989958", "0x7E8140", "0x9FA060", "0x868846", "0xA6A768", "0x8E8F4E", "0xAAAB6E"]
+    ;     boss_health_colors := findAllColorsBetween(hexCodes[brightnessIndex*2-1], hexCodes[brightnessIndex*2])
+    ; }
+    ; else if (ColorBlind == "Protanopia" || ColorBlind == "protanopia")
+    ; {
+    ;     hexCodes := ["0xA76B00", "0xD2A724", "0xAD7700", "0xD4A926", "0xB78500", "0xD8AD2A", "0xBF8A00", "0xDAAF2C", "0xBF9100", "0xDCB12F", "0xC49800", "0xDEB331"]
+    ;     boss_health_colors := findAllColorsBetween(hexCodes[brightnessIndex*2-1], hexCodes[brightnessIndex*2])
+    ; }
+    ; else if (ColorBlind == "Tritanopia" || ColorBlind == "tritanopia" )
+    ; {
+    ;     hexCodes := ["0x9E414F", "0xCC7F8D", "0xAC525F", "0xCE818E", "0xAF5A67", "0xD08391", "0xB56471", "0xD28694", "0xBA6A77", "0xD58A98", "0xBA727F", "0xD88F9B"]
+    ;     boss_health_colors := findAllColorsBetween(hexCodes[brightnessIndex*2-1], hexCodes[brightnessIndex*2])
+    ; }
 
 
     Hotkey, %settingsGUIHotkey%, ShowSettingsGUI
@@ -323,82 +323,128 @@ check_destiny_open:
 Return
 
 ; calculates the number of pixels in the bitmap that fall withing the healthbar color range
-bossHealthPercentage(pBitmap, has_final=0)
+; bossHealthPercentage(pBitmap, has_final=0)
+; {
+;     totalPixels := 0
+;     healthBarPixels := 0
+;     Gdip_GetImageDimensions(pBitmap, w, h)
+;     x := 0
+;     y := 0
+;     loop %h%
+;     {
+;         loop %w%
+;         {
+;             totalPixels += 1
+;             color := Gdip_GetPixel(pBitmap, x, y)
+;             if (boss_health_colors.HasKey(color))
+;                 healthBarPixels += 1
+;             x += 1
+;         }
+;         x := 0
+;         y += 1
+;     }
+;     loop, % has_final
+;     {
+;         totalPixels -= 2
+;         if (!1080pResolution)
+;             totalPixels -= 7
+;     } 
+;     return (healthBarPixels / totalPixels) * 100
+; }
+
+bossHealthPercentage(pBitmap, has_final=0, tolerance=30)  ; Adjust targetColorSum and tolerance as needed
 {
     totalPixels := 0
     healthBarPixels := 0
     Gdip_GetImageDimensions(pBitmap, w, h)
     x := 0
     y := 0
+
     loop %h%
     {
         loop %w%
         {
             totalPixels += 1
             color := Gdip_GetPixel(pBitmap, x, y)
-            if (boss_health_colors.HasKey(color))
+
+            ; Extract RGB and compute sum
+            red := (color >> 16) & 0xFF
+            green := (color >> 8) & 0xFF
+            blue := color & 0xFF
+
+            validColor := 1
+            if (Abs(red - 222) > tolerance)
+                validColor := 0
+            if (Abs(green - 140) > tolerance)
+                validColor := 0
+            if (Abs(blue - 30) > tolerance)
+                validColor := 0
+
+            if (validColor = 1)
                 healthBarPixels += 1
+
             x += 1
         }
         x := 0
         y += 1
     }
+
     loop, % has_final
     {
         totalPixels -= 2
         if (!1080pResolution)
             totalPixels -= 7
     } 
+
     return (healthBarPixels / totalPixels) * 100
 }
 
 ; functions for getting every possible color the bosses healthbar could be
-    findAllColorsBetween(darkColor, LightColor)
-    {
-        darkArray := convertToRGB(darkColor) 
-        lightArray := convertToRGB(lightColor) 
-        returnHashTable := {}
-        redDifference := lightArray[1] - darkArray[1] + 1
-        greenDifference := lightArray[2] - darkArray[2] + 1
-        blueDifference := lightArray[3] - darkArray[3] + 1
-        redIndex := 0
-        greenIndex := 0
-        blueIndex := 0
-        loop, %redDifference%
-        {
-            loop, %greenDifference%
-            {
-                loop, %blueDifference%
-                {
-                    tempColorArray := [(darkArray[1]+redIndex), (darkArray[2]+greenIndex), (darkArray[3]+blueIndex)]
-                    tempColor := format("{:s}", convertToHex(tempColorArray))
-                    returnHashTable[tempColor] := 1
-                    blueIndex++
-                }
-                blueIndex := 0
-                greenIndex++
-            }
-            greenIndex := 0
-            redIndex++
-        }
-        return returnHashTable
-    }
+; findAllColorsBetween(darkColor, LightColor)
+; {
+;     darkArray := convertToRGB(darkColor) 
+;     lightArray := convertToRGB(lightColor) 
+;     returnHashTable := {}
+;     redDifference := lightArray[1] - darkArray[1] + 1
+;     greenDifference := lightArray[2] - darkArray[2] + 1
+;     blueDifference := lightArray[3] - darkArray[3] + 1
+;     redIndex := 0
+;     greenIndex := 0
+;     blueIndex := 0
+;     loop, %redDifference%
+;     {
+;         loop, %greenDifference%
+;         {
+;             loop, %blueDifference%
+;             {
+;                 tempColorArray := [(darkArray[1]+redIndex), (darkArray[2]+greenIndex), (darkArray[3]+blueIndex)]
+;                 tempColor := format("{:s}", convertToHex(tempColorArray))
+;                 returnHashTable[tempColor] := 1
+;                 blueIndex++
+;             }
+;             blueIndex := 0
+;             greenIndex++
+;         }
+;         greenIndex := 0
+;         redIndex++
+;     }
+;     return returnHashTable
+; }
 
+convertToHex(array)
+{
+    return format("0xff{:02x}{:02x}{:02x}", array*) 
+}
+
+convertToRGB(color) 
+{
+    red := "0x" . SubStr(color, 3, 2)
+    green := "0x" . SubStr(color, 5, 2)
+    blue := "0x" . SubStr(color, 7, 2)
+    array := [format("{:d}", red), format("{:d}", green), format("{:d}", blue)]
     convertToHex(array)
-    {
-        return format("0xff{:02x}{:02x}{:02x}", array*) 
-    }
-
-    convertToRGB(color) 
-    {
-        red := "0x" . SubStr(color, 3, 2)
-        green := "0x" . SubStr(color, 5, 2)
-        blue := "0x" . SubStr(color, 7, 2)
-        array := [format("{:d}", red), format("{:d}", green), format("{:d}", blue)]
-        convertToHex(array)
-        return array
-    }
-; =============================
+    return array
+}
 
 Return
 
@@ -417,7 +463,7 @@ calculateDPS(bossName)
 
     boss_max_hp := boss_health_pool[bossName]
     final_stand := boss_final_stand[bossName]
-    
+
     If (bossName == "default with final stand" || bossName == "default")
         is_default := 1
     Else
@@ -611,11 +657,11 @@ Return
 ; Return
 
 reload_the_script:
-    reload
+reload
 return
 
 close_the_script:
-    ExitApp
+ExitApp
 return
 
 F6::
