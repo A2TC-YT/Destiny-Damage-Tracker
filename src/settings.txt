@@ -1,6 +1,7 @@
 ===========================
 ==        HOTKEYS        ==
 ===========================
+Close Script Hotkey                      = F5
 Reload Script Hotkey                     = F4
 Settings GUI Hotkey                      = F3
 Manually Start and Stop DPS Phases       = true
@@ -16,18 +17,18 @@ Include Burst and Sustained Specifiers   = true
 ============================
 ==    HEALTH AND DAMAGE   ==
 ============================
-Decimal Places in Main Health Percentage = 2
+Decimal Places in Main Health Percentage = 6
 Include Estimated Boss Health            = true
-Show Damage Dealt Instead of Boss Health = false
+Show Damage Dealt Instead of Boss Health = true
 Show Damage Phase Duration               = true
-Show Estimated Time to Kill              = true
+Show Estimated Time to Kill              = false
 
 ============================
 ==     GUI APPEARANCE     ==
 ============================
 Display info in a separate window        = false
 GUI Text Color                           = white
-GUI Text Font                            = Futura
+GUI Text Font                            = Microsoft YaHei UI Bold
 Make Text Bold                           = true
 
 ============================
@@ -37,6 +38,5 @@ Make Text Bold                           = true
 Ultrawide 1440p Monitor                  = false
 Colorblind Setting                       = Normal
 Colorblind options are: Normal, Deuteranopia, Protanopia, Tritanopia
-Brightness Level                         = 7
+Brightness Level                         = 4
 Supported brightness options are: 2, 3, 4, 5, 6, 7
-Lower brightness options may be less consistent
