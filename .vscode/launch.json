@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "ahkdbg",
+      "request": "launch",
+      "name": "AHKDebug",
+      "program": "${file}",
+      "stopOnEntry": false,
+      "captureStreams": true,
+      "runtime": "C:\\Program Files\\AutoHotkey\\v1.1.37.02\\AutoHotkeyU32.exe",
+      "port": 9005
+    }
+  ]
+}

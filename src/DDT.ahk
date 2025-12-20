@@ -263,27 +263,66 @@ get_settings()
             ColorBlind := value
     }
 
-    ; TODO: Full brightness/color blind colors refactor using RBG arrays with median color
-    brightnessIndex := brightnessLevel - 1
-    global hexCodes
+
+    ; Values are taken on full black/white backgrounds using color picker.
+
+    ; You can fill your own values to RGBMedians array.
+    ; It containts Red Green and Blue average value between darkest and brightest colors on particular setting
+    global RGBMedians
+    RGBMedians := Object()
     if (ColorBlind == "Normal" || ColorBlind == "normal")
     {
-        hexCodes := ["0xB86708", "0xE49422", "0xBE740D", "0xE69A2A", "0xC88113", "0xE8A032", "0xCC8918", "0xEAA73A", "0xD0901D", "0xECAD42", "0xD39621", "0xFFFFFF"]
+        ; Normal
+        ; brightness | RGB Dark | RGB Bright
+        ; 1 | 181, 93, 5 | 231, 133, 23
+        ; 2 | 189, 106, 8 | 234, 145, 32
+        ; 3 | 198, 121, 13 | 237, 158, 44
+        ; 4 | 204, 132, 19 | 239, 167, 54
+        ; 5 | 208, 140, 24 | 240, 174, 62
+        ; 6 | 212, 147, 29 | 242, 179, 70
+        ; 7 | 214, 152, 33 | 242, 183, 76
+        RGBMedians:= [[206, 113, 14], [211, 125, 20], [217, 139, 28], [221, 149, 36], [224, 157, 43], [227, 163, 49], [228, 167, 54]]
     }
     else if (ColorBlind == "Deuteranopia" || ColorBlind == "deuteranopia")
     {
-        hexCodes := ["0x606121", "0x929252", "0x6E6A2E", "0x929252", "0x767A37", "0x989958", "0x7E8140", "0x9FA060", "0x868846", "0xA6A768", "0x8E8F4E", "0xAAAB6E"]
+        ; Deuteranopia
+        ; brightness | RGB Dark | RGB Bright
+        ; 1 |  | 
+        ; 2 |  | 
+        ; 3 |  | 
+        ; 4 |  | 
+        ; 5 |  | 
+        ; 6 |  | 
+        ; 7 |  | 
+        RGBMedians:= [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]]
     }
     else if (ColorBlind == "Protanopia" || ColorBlind == "protanopia")
     {
-        hexCodes := ["0xA76B00", "0xD2A724", "0xAD7700", "0xD4A926", "0xB78500", "0xD8AD2A", "0xBF8A00", "0xDAAF2C", "0xBF9100", "0xDCB12F", "0xC49800", "0xDEB331"]
+        ; Protanopia
+        ; brightness | RGB Dark | RGB Bright
+        ; 1 |  | 
+        ; 2 |  | 
+        ; 3 |  | 
+        ; 4 |  | 
+        ; 5 |  | 
+        ; 6 |  | 
+        ; 7 |  | 
+        RGBMedians:= [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]]
     }
     else if (ColorBlind == "Tritanopia" || ColorBlind == "tritanopia" )
     {
-        hexCodes := ["0x9E414F", "0xCC7F8D", "0xAC525F", "0xCE818E", "0xAF5A67", "0xD08391", "0xB56471", "0xD28694", "0xBA6A77", "0xD58A98", "0xBA727F", "0xD88F9B"]
+        ; Tritanopia
+        ; brightness | RGB Dark | RGB Bright
+        ; 1 |  | 
+        ; 2 |  | 
+        ; 3 |  | 
+        ; 4 |  | 
+        ; 5 |  | 
+        ; 6 |  | 
+        ; 7 |  | 
+        RGBMedians:= [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]]
     }
-    boss_health_colors := [(convertToRGB(hexCodes[brightnessIndex*2-1])[0] + convertToRGB(hexCodes[brightnessIndex*2])[0]) / 2, (convertToRGB(hexCodes[brightnessIndex*2-1])[1] + convertToRGB(hexCodes[brightnessIndex*2])[1]) / 2, (convertToRGB(hexCodes[brightnessIndex*2-1])[2] + convertToRGB(hexCodes[brightnessIndex*2])[2]) / 2]
-
+    boss_health_colors := RGBMedians[brightnessLevel]
 
     Hotkey, %settingsGUIHotkey%, ShowSettingsGUI
     Hotkey, %startAndStopDPS%, manualDPSPhase
@@ -322,6 +361,7 @@ Return
 
 ; calculates the number of pixels in the bitmap that fall withing the healthbar color range
 bossHealthPercentage(pBitmap, has_final=0, tolerance=30) {
+    global boss_health_colors
     totalPixels := 0
     healthBarPixels := 0
     Gdip_GetImageDimensions(pBitmap, w, h)
@@ -335,17 +375,17 @@ bossHealthPercentage(pBitmap, has_final=0, tolerance=30) {
             totalPixels += 1
             color := Gdip_GetPixel(pBitmap, x, y)
 
-            ; Extract RGB and compute sum
+            ; Extract RGB
             red := (color >> 16) & 0xFF
             green := (color >> 8) & 0xFF
             blue := color & 0xFF
 
             validColor := 1
-            if (Abs(red - boss_health_colors[0]) > tolerance)
+            if (Abs(red - boss_health_colors[1]) > tolerance)
                 validColor := 0
-            if (Abs(green - boss_health_colors[1]) > tolerance)
+            if (Abs(green - boss_health_colors[2]) > tolerance)
                 validColor := 0
-            if (Abs(blue - boss_health_colors[2]) > tolerance)
+            if (Abs(blue - boss_health_colors[3]) > tolerance)
                 validColor := 0
 
             if (validColor = 1)
