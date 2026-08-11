@@ -1,3 +1,7 @@
+#  NEW VERSION
+
+###  An updated version of this program with awesome new features was created by MrLinks. Please use that version if you want to test damage or just see fun DPS info in general. [LINK](https://github.com/MrLinks75/DDT_AHK_V2)
+
 #  Destiny Damage Tracker 
 
 Destiny Damage Tracker is a tool for Destiny 2 that helps you keep track of certain statistics and information. This includes the boss's current health, the fireteam's DPS (damage per second), the estimated time to defeat the boss, and more. 
