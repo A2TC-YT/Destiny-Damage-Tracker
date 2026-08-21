@@ -43,6 +43,7 @@ global decimalPlacesHealthPercentage := 2
 global showDamageDuration := 0
 global estimateTimeToKill := 0
 global 1080pResolution := 0
+global 2160pResolution := 0
 global manualDPSPhases := 0
 global isUltraWide := 0
 global boss_health_colors 
@@ -59,6 +60,8 @@ global get_back_in_loop := 0
 global healthbar_location := "858|1302|845|3"
 if (1080pResolution)
     global healthbar_location := "644|977|634|1"
+if (2160pResolution)
+    global healthbar_location := "1288|1954|1263|1"
 
 if (separateWindow)
 {
@@ -253,6 +256,8 @@ get_settings()
             boldText := ParseBooleanValue(value)
         else if (setting == "1920x1080")
             1080pResolution := ParseBooleanValue(value)
+        else if (setting == "3840x2160")
+            2160pResolution := ParseBooleanValue(value)
         else if (setting == "Ultrawide 1440p Monitor")
             isUltraWide := ParseBooleanValue(value)
         else if (setting == "Brightness Level")

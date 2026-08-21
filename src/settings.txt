@@ -34,6 +34,7 @@ Make Text Bold                           = true
 ==         SCREEN         ==
 ============================
 1920x1080                                = false
+3840x2160                                = false
 Ultrawide 1440p Monitor                  = false
 Colorblind Setting                       = Normal
 Colorblind options are: Normal, Deuteranopia, Protanopia, Tritanopia
